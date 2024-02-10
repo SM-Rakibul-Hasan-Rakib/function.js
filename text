@@ -1,0 +1,140 @@
+function calculateMoney(numOfTicket) {
+  if (numOfTicket < 0) return "Invalid number of ticket";
+
+  const perTicketPrice = 120;
+  const guardPrice = 500;
+  const stuffPrice = 50 * 8;
+  const totalExpenses = guardPrice + stuffPrice;
+
+  const totalSold = numOfTicket * perTicketPrice;
+
+  const totalMoney = totalSold - totalExpenses;
+
+  return totalMoney;
+}
+
+// console.log(calculateMoney(10));
+// console.log(calculateMoney(1055));
+// console.log(calculateMoney(93));
+// console.log(calculateMoney(-130));
+
+function checkName(name) {
+  if (typeof name !== "string") {
+    return "invalid";
+  }
+  const goodCharacters = ["a", "y", "i", "e", "o", "u", "w"];
+  const lastCharacter = name[name.length - 1];
+
+  if (goodCharacters.includes(lastCharacter?.toLowerCase())) {
+    return "Good Name";
+  } else {
+    return "Bad Name";
+  }
+}
+
+// console.log(checkName("Salman"));
+// console.log(checkName("RAFEE"));
+// console.log(checkName("Jhankar"));
+// console.log(checkName(199));
+// console.log(checkName(["Rashed"]));
+
+function deleteInvalids(array) {
+  if (!Array.isArray(array)) {
+    return "Invalid Array";
+  }
+
+  let filteredArray = [];
+
+  for (let i = 0; i < array.length; i++) {
+    const element = array[i];
+    if (typeof element === "number" && !isNaN(element)) {
+      filteredArray.push(element);
+    } else {
+      continue;
+    }
+  }
+
+  return filteredArray;
+}
+
+// console.log(
+//   deleteInvalids([
+//     1,
+//     null,
+//     undefined,
+//     18,
+//     -19,
+//     NaN,
+//     "12",
+//     [1, 2],
+//     { ob: "lala" },
+//   ])
+// );
+// console.log(deleteInvalids(["1", { num: 2 }, NaN]));
+// console.log(deleteInvalids([1, 2, -3]));
+// console.log(deleteInvalids({ num: [1, 2, 3] }));
+
+function password(userObject) {
+  const objectProperties = ["name", "birthYear", "siteName"];
+  for (const element of Object.keys(userObject)) {
+    if (!objectProperties.includes(element)) {
+      return "Invalid";
+    }
+  }
+
+  if (userObject.birthYear.toString().length !== 4) {
+    return "Invalid";
+  }
+
+  const siteNameArray = userObject.siteName.split("");
+  const firstCharacter = siteNameArray.shift();
+  const siteName = `${firstCharacter.toUpperCase()}${siteNameArray.join("")}`;
+
+  const password = `${siteName}#${userObject.name}@${userObject.birthYear}`;
+
+  return password;
+}
+
+// console.log(
+//   password({ name: "kolimuddin", birthYear: 1999, siteName: "google" })
+// );
+// console.log(password({ name: "rahat", birthYear: 2002, siteName: "Facebook" }));
+// console.log(password({ name: "toky", birthYear: 200, siteName: "Facebook" }));
+
+function monthlySavings(arrayOfSalary, livingCost) {
+  if (!Array.isArray(arrayOfSalary)) {
+    return "Invalid Array";
+  }
+
+  if (typeof livingCost !== "number") {
+    return "Invalid Number";
+  }
+
+  const taxPercent = 20;
+  const countTaxAmount = 3000;
+
+  let totalSalary = 0;
+
+  for (const amount of arrayOfSalary) {
+    if (amount >= countTaxAmount) {
+      const tax = (amount * taxPercent) / 100;
+      const leftAmount = amount - tax;
+      totalSalary = totalSalary + leftAmount;
+    } else {
+      totalSalary = totalSalary + amount;
+    }
+  }
+
+  const savings = totalSalary - livingCost;
+
+  if (savings < 0) {
+    return "earn more";
+  } else {
+    return savings;
+  }
+}
+
+// console.log(monthlySavings([1000, 2000, 3000], 5400));
+// console.log(monthlySavings([1000, 2000, 2500], 5000));
+// console.log(monthlySavings([900, 2700, 3400], 10000));
+// console.log(monthlySavings(100, [900, 2700, 3400]));
